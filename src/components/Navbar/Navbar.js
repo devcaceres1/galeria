@@ -5,9 +5,9 @@ function Navbar (props) {
     return (
         <header className = 'toolbar'>
         <nav className = 'navigator'> 
-            <div> </div>
-            <div> <a href="./"> Navbar to be </a> </div>
-            <div>
+            <div className = 'home-link'> <a href="./"> Navbar to be </a> </div>
+            <div className = 'wrapper'> </div>
+            <div className = 'multi-link'>
                 <ul>
                     <li> <a href="./"> Home </a></li>
                     <li> <a href="./"> User Profile </a></li>
