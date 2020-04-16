@@ -10,7 +10,7 @@
     display : flex;
     align-items: center;
     height: 100%;
-    padding: 0 .5rem;
+    padding: 0 2rem;
     justify-content: space-between;
 }
 
@@ -27,6 +27,7 @@ p{
 
 .multi-link a{
     color : white;
+    text-decoration: none;
 }
 
 .multi-link a:hover,

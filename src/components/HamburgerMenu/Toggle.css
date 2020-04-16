@@ -1,0 +1,21 @@
+.toggle-butt{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height : 21px;
+    padding: 0;
+    width : 32px;
+    background : transparent;
+    border : none;
+    cursor: pointer;
+}
+
+.toggle-butt:focus{
+    outline: none;
+}
+
+.toggle-butt-row{
+    width: 30px;
+    height : 3px;
+    background-color: white;
+}
