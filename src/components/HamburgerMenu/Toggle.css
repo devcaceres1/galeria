@@ -7,15 +7,27 @@
     width : 32px;
     background : transparent;
     border : none;
-    cursor: pointer;
+    cursor : pointer;
 }
 
 .toggle-butt:focus{
-    outline: none;
+    outline : none;
 }
 
 .toggle-butt-row{
     width: 30px;
     height : 3px;
-    background-color: white;
+    background-color : white;
+}
+
+.hamburger-menu{
+    position : fixed;
+    height : 100%;
+    width : 300px;
+    background-color : lime;
+    box-shadow : 2px 0 5px rgba(0,0,0,0.5);
+    top : 0;
+    left: 0;
+    border: dashed 4px black;
+    z-index: 200;
 }
