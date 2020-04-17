@@ -3,17 +3,17 @@ import './HamburgerMenu.css'
 
 
 function HamburgerMenu (props) {
-    let drawer = 'side-drawer'
+    let drawer = 'hamburger-menu'
         if (props.show) {
-        drawer = 'side-drawer open'
+        drawer = 'hamburger-menu open'
     }
         return (
-        <nav className = 'hamburger-menu'>
+        <nav className = {drawer}>
             <div className = 'gray-out'> </div> 
         <ul className = 'ham-links'>
             <li> <a href = '/'> Photos </a> </li>
             <li> <a href = '/'> Comments </a> </li>
-            <li> <a href = '/'> Users </a> </li>
+            <li> <a href = '/'> User Profile </a> </li>
         </ul>
     </nav>
         )

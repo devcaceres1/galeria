@@ -10,11 +10,12 @@ function Navbar (props) {
             <div>
                 <ToggleButton click = {props.togClickHandler}/>
             </div>
-            <div className = 'home-link'> <a href="./"> Navbar to be </a> </div>
+            <div className = 'home-link'> <a href="./"> Galeria  </a> </div>
             <div className = 'wrapper'> </div>
             <div className = 'multi-link'>
-                <ul>
-                    <li> <a href="./"> Home </a></li>
+                <ul className = 'actions'>
+                    <li> <a href="./"> Photos </a></li>
+                    <li> <a href="./"> Comments </a></li>
                     <li> <a href="./"> User Profile </a></li>
                 </ul>
             </div>
