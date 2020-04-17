@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Toggle.css'
+import './HamburgerMenu.css'
 
 
 class HamburgerMenu extends Component {
@@ -7,9 +7,10 @@ class HamburgerMenu extends Component {
         return (
         <nav className = 'hamburger-menu'>
             <div className = 'gray-out'> </div> 
-        <ul>
-            <li> <a href = '/'> Products </a> </li>
-            <li> <a href = '/'> Profile </a> </li>
+        <ul className = 'ham-links'>
+            <li> <a href = '/'> Photos </a> </li>
+            <li> <a href = '/'> Comments </a> </li>
+            <li> <a href = '/'> Users </a> </li>
         </ul>
     </nav>
         )
