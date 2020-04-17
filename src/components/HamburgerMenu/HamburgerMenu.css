@@ -1,7 +1,7 @@
 .hamburger-menu {
     position : fixed;
     height : 100%;
-    width : 50%;
+    width : 60%;
     max-width : 350px;
     background-image: linear-gradient(black, white, aquamarine);
     box-shadow : 2px 0 5px rgba(0,0,0,.5);
