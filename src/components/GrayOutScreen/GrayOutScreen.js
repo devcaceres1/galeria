@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './GrayOutScreen.css'
 
 
-class GrayOutScreen extends Component {
-    render () {
+function GrayOutScreen (props) {
         return (
-            <div className = 'gray-out'> </div> 
+            <div className = 'gray-out' onClick = {props.click}> </div> 
         )
     } 
-}
 
 export default GrayOutScreen;

@@ -2,8 +2,11 @@ import React, {Component} from 'react';
 import './HamburgerMenu.css'
 
 
-class HamburgerMenu extends Component {
-    render (){
+function HamburgerMenu (props) {
+    let drawer = 'side-drawer'
+        if (props.show) {
+        drawer = 'side-drawer open'
+    }
         return (
         <nav className = 'hamburger-menu'>
             <div className = 'gray-out'> </div> 
@@ -15,8 +18,6 @@ class HamburgerMenu extends Component {
     </nav>
         )
     } 
-}
-
 
 // const HamburgerMenu = props => (
 //     <nav className = 'hamburger-menu'> 

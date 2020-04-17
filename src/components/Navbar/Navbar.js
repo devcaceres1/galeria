@@ -8,7 +8,7 @@ function Navbar (props) {
         <header className = 'toolbar'>
         <nav className = 'navigator'> 
             <div>
-                <ToggleButton/>
+                <ToggleButton click = {props.togClickHandler}/>
             </div>
             <div className = 'home-link'> <a href="./"> Navbar to be </a> </div>
             <div className = 'wrapper'> </div>
