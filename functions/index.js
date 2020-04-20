@@ -3,11 +3,10 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
- response.send("Hola Mundo!");
-});
+const express = require('express');
+const app = express();
 
-exports.getPosts = functions.https.onRequest((request, response) => {
+app.get('/posts', (request, response) => {
     admin
     .firestore()
     .collection('posts')
@@ -15,20 +14,26 @@ exports.getPosts = functions.https.onRequest((request, response) => {
     .then((data) => {
         let posts = [];
         data.forEach((document) => {
-            posts.push(document.data());
+            posts.push({
+                postsId : document.id,
+                body : document.data().body,
+                userName : document.data().userName,
+                createdOn : document.data().createdOn
+            });
         });
         return response.json(posts);
     })
     .catch((error) => console.error(error));
-}); 
+});
 
-exports.createPosts = functions.https.onRequest((request, response) => {
+app.post('/posts', (request, response) => {
     const newPosts = {
         body : request.body.body,
         userName : request.body.userName,
-        createdOn : admin.firestore.Timestamp.fromDate(new Date())
-        // location : request.body.location
+        createdOn : admin.firestore.Timestamp.fromDate(new Date()),
+        location : request.body.location
     };
+
     admin
     .firestore()
     .collection('posts')
@@ -42,3 +47,4 @@ exports.createPosts = functions.https.onRequest((request, response) => {
         });
     });
     
+exports.api = functions.https.onRequest(app);
