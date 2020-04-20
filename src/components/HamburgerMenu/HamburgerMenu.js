@@ -11,9 +11,9 @@ function HamburgerMenu (props) {
         <nav className = {drawer}>
             <div className = 'gray-out'> </div> 
         <ul className = 'ham-links'>
-            <li> <a href = '/'> Photos </a> </li>
-            <li> <a href = '/'> Comments </a> </li>
-            <li> <a href = '/'> User Profile </a> </li>
+        <li> <a href="./"> Photos </a></li>
+                    <li> <a href="./"> Comments </a></li>
+                    <li> <a href="./"> User Profile </a></li>
         </ul>
     </nav>
         )
