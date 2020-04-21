@@ -63,6 +63,8 @@ app.post('/posts', (request, response) => {
         });
     });
 
+    //Variable to make sure someone does not use a space/spaces as part of one of the required fields.       
+
     const emptyString = (string) => {
         if(string.trim() === ''){
             return true; 
@@ -70,6 +72,8 @@ app.post('/posts', (request, response) => {
             return false;
         };
     };
+
+    //Variable to make sure inputted email is in fact a valid email. Firebase expression used 'RegExp' to set the value for const emailValid.
 
     const emailValid = (email) => {
         const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -81,6 +85,8 @@ app.post('/posts', (request, response) => {
         }; 
     };
         
+    //Signup function
+
 app.post('/signup', (request, response) => {
     const newUser = {
          email: request.body.email,
@@ -89,7 +95,11 @@ app.post('/signup', (request, response) => {
          userName: request.body.userName
     };
 
+    //Variable used to hold potential errors
+
     let allErrors = {};
+
+    //Set of conditionals to check if required fields are not only filled, but filled correctly.    
 
     if(emptyString(newUser.email)){
         allErrors.email = 'Email can not be empty'
@@ -109,6 +119,8 @@ app.post('/signup', (request, response) => {
         allErrors.userName = 'User Name can not be empty'
 
     }
+
+        //Object in this case is used as a JS class. Checking to see if the allErrors object holds any value other than zero. If in fact it does, then it'll return a 400 status.
 
     if(Object.keys(allErrors).length > 0){
         return response.status(400).json(allErrors);
