@@ -64,18 +64,22 @@ app.post('/posts', (request, response) => {
     });
 
     const emptyString = (string) => {
-        if(string.trim() === '')
-        return true; 
-         else return false;
-        }
+        if(string.trim() === ''){
+            return true; 
+        } else {
+            return false;
+        };
+    };
 
     const emailValid = (email) => {
         const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         
-        if(email.match(regularExpression))
-        return true; 
-         else return false;
-        }
+        if(email.match(regularExpression)){
+            return true; 
+        } else {
+            return false;
+        }; 
+    };
         
 app.post('/signup', (request, response) => {
     const newUser = {
@@ -85,25 +89,31 @@ app.post('/signup', (request, response) => {
          userName: request.body.userName
     };
 
-    let errors = {};
+    let allErrors = {};
 
     if(emptyString(newUser.email)){
-        errors.email = 'Email can not be empty'
+        allErrors.email = 'Email can not be empty'
     } else if (!emailValid(newUser.email)) {
-        errors.email = "Valid email needed"
+        allErrors.email = "Valid email needed"
         }
 
-    if(emptyString(newUser.password)) errors.password = "Password can not be empty"
+    if(emptyString(newUser.password)) {
+        allErrors.password = "Password can not be empty"
+    }
 
-    if(newUser.password !== newUser.confirmPassword) 
-    errors.confirmPassword = "Passwords do not match"
+    if(newUser.password !== newUser.confirmPassword) {
+        allErrors.confirmPassword = "Passwords do not match"
+    }
+   
+    if(emptyString(newUser.userName)){
+        allErrors.userName = 'User Name can not be empty'
 
-    if(emptyString(newUser.userName))
-        errors.userName = 'User Name can not be empty'
+    }
 
-    if(Object.keys(errors).length > 0)
-    return response.status(400).json(errors);
-
+    if(Object.keys(allErrors).length > 0){
+        return response.status(400).json(allErrors);
+    };
+   
     let token;
     let userId;
 
