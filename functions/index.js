@@ -63,6 +63,20 @@ app.post('/posts', (request, response) => {
         });
     });
 
+    const emptyString = (string) => {
+        if(string.trim() === '')
+        return true; 
+         else return false;
+        }
+
+    const emailValid = (email) => {
+        const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        if(email.match(regularExpression))
+        return true; 
+         else return false;
+        }
+        
 app.post('/signup', (request, response) => {
     const newUser = {
          email: request.body.email,
@@ -70,6 +84,28 @@ app.post('/signup', (request, response) => {
          confirmPassword: request.body.confirmPassword,
          userName: request.body.userName
     };
+
+    let errors = {};
+
+    if(emptyString(newUser.email)){
+        errors.email = 'Email can not be empty'
+    } else if (!emailValid(newUser.email)) {
+        errors.email = "Valid email needed"
+        }
+
+    if(emptyString(newUser.password)) errors.password = "Password can not be empty"
+
+    if(newUser.password !== newUser.confirmPassword) 
+    errors.confirmPassword = "Passwords do not match"
+
+    if(emptyString(newUser.userName))
+        errors.userName = 'User Name can not be empty'
+
+    if(Object.keys(errors).length > 0)
+    return response.status(400).json(errors);
+
+    let token;
+    let userId;
 
     admin
     .firestore()
@@ -85,15 +121,32 @@ app.post('/signup', (request, response) => {
         }
     })
     .then(data => {
+        userId = data.user.uid;
         return data.user.getIdToken();
     })
-    .then(token => {
+    .then((tokenId) => {
+        token = tokenId;
+        const userCreds = {
+            userName : newUser.userName,
+            email : newUser.email,
+            createdOn : admin.firestore.Timestamp.fromDate(new Date()),
+            userId 
+        };
+        return admin
+    .firestore()
+    .doc(`/users/${newUser.newUser}`).set(userCreds);
+    })
+    .then(() => {
         return response.status(201).json({token});
     })
     .catch((error) => {
         console.error(error);
-        return response.status(500).json({error : error.code})
-    }); 
-});
-    
+        if(error.code === "auth/email-already-in-use"){
+            return response.status(400).json({email : "Email is already in use"})
+        } else {
+            return response.status(500).json({error : error.code})
+        }
+        })
+    });
+
 exports.api = functions.https.onRequest(app);
